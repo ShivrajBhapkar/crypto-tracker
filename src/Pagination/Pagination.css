@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+
+  padding: 4px;
+  margin: 4px;
+}
+.page-item {
+  padding: 6px;
+}
+.page-item a {
+  padding: 1px;
+  text-decoration: none;
+  font-size: 15px;
+}
+.page-link {
+  /* border-radius: 100%; */
+  background-color: rgb(32, 26, 26);
+  color: whitesmoke;
+  margin: 5px;
+  border: none;
+}
+ul {
+  list-style-type: none;
+  /* font-weight: bold;
+  font-size: 20px; */
+}
