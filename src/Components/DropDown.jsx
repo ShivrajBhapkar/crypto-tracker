@@ -1,10 +1,10 @@
 import React from "react";
-import Select from "react-select";
-
-const options = [
-  { value: "INR", label: "INR" },
-  { value: "USD", label: "USD" },
-];
+// import Select from "react-select";
+import "./DropDown.css";
+// const options = [
+//   { value: "INR", label: "INR" },
+//   { value: "USD", label: "USD" },
+// ];
 
 const MyComponent = ({ currency, setCurrency }) => (
   <div>
