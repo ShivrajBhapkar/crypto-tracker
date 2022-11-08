@@ -44,3 +44,10 @@
 .coin-input::placeholder {
   color: #e2e2e2;
 }
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: "space-between";
+  width: "100%";
+}
