@@ -4,39 +4,40 @@ import axios from "axios";
 import Coin from "../Coin";
 import DropDown from "../Components/DropDown";
 import "./Homepage.css";
+import CoinsTable from "../Components/CoinsTable";
 function HomePage() {
-  const [coins, setCoins] = useState([]);
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrrentPage] = useState(1);
-  const [currency, setCurrency] = useState("INR");
-  const [symbol, setSymbol] = useState("₹");
-  const [recordsPerPage] = useState(10);
+  // const [coins, setCoins] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [currentPage, setCurrrentPage] = useState(1);
+  // const [currency, setCurrency] = useState("INR");
+  // const [symbol, setSymbol] = useState("₹");
+  // const [recordsPerPage] = useState(10);
 
-  useEffect(() => {
-    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
-    axios
-      .get(url)
-      .then((res) => {
-        setCoins(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => console.log(error));
-    if (currency === "INR") setSymbol("₹");
-    else if (currency === "USD") setSymbol("$");
-  }, [currency]);
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
-  const filteredCoins = coins.filter((coin) => {
-    return coin.name.toLowerCase().includes(search.toLowerCase());
-  });
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const nPages = Math.ceil(coins.length / recordsPerPage);
+  // useEffect(() => {
+  //   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
+  //   axios
+  //     .get(url)
+  //     .then((res) => {
+  //       setCoins(res.data);
+  //       // console.log(res.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  //   if (currency === "INR") setSymbol("₹");
+  //   else if (currency === "USD") setSymbol("$");
+  // }, [currency]);
+  // const handleChange = (e) => {
+  //   setSearch(e.target.value);
+  // };
+  // const filteredCoins = coins.filter((coin) => {
+  //   return coin.name.toLowerCase().includes(search.toLowerCase());
+  // });
+  // const indexOfLastRecord = currentPage * recordsPerPage;
+  // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // const nPages = Math.ceil(coins.length / recordsPerPage);
 
   return (
     <>
-      <div>
+      {/* <div>
         <DropDown currency={currency} setCurrency={setCurrency} />
       </div>
       <div className="coin-app">
@@ -73,7 +74,8 @@ function HomePage() {
           currentPage={currentPage}
           setCurrentPage={setCurrrentPage}
         />
-      </div>
+      </div> */}
+      <CoinsTable />
     </>
   );
 }

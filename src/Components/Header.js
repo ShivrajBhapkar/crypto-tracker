@@ -1,15 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-// import DropDown from './DropDown'
+
+import { CryptoState } from "../CryptoContext";
 const Header = () => {
+  const { currency, setcurrency } = CryptoState();
+  // console.log(currency);
   return (
     <>
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
-          logo
+          Crypto Tracker
         </Link>
-        <div></div>
+        <div>
+          <select
+            defaultValue={currency}
+            onChange={(e) => setcurrency(e.target.value)}
+          >
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
       </nav>
     </>
   );
