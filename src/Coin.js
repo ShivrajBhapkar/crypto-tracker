@@ -1,6 +1,8 @@
 import React from "react";
 import "./Coin.css";
-
+export function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 const Coin = ({
   name,
   image,
@@ -21,12 +23,10 @@ const Coin = ({
         </div>
         <div className="coin-data">
           <p className="coin-price">
-            {currency}
-            {price}
+            {currency} {price}
           </p>
           <p className="coin-volume">
-            {currency}
-            {volume.toLocaleString()}
+            {currency} {volume.toLocaleString()}
           </p>
           {priceChange < 0 ? (
             <p className="coin-percent red">{priceChange.toFixed(2)}%</p>
@@ -34,7 +34,7 @@ const Coin = ({
             <p className="coin-percent green">{priceChange.toFixed(2)}%</p>
           )}
           <p className="coin-marketcap">
-            Mkt Cap :{currency}
+            Mkt Cap: {currency}
             {marketcap.toLocaleString()}
           </p>
         </div>

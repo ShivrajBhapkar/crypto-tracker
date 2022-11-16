@@ -5,5 +5,20 @@
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 25px;
+  margin: 10px;
+  margin-left: 100px;
+}
+.navbar {
+  padding: 10px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.7);
+}
+.currency-box {
+  padding: 10px;
+}
+.currency-option {
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 15px;
 }
