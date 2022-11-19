@@ -8,7 +8,14 @@
   background-color: #1a1a1c;
   color: #fff;
 }
-
+a {
+  color: #f4f4f4;
+  text-decoration: none;
+}
+h1 {
+  text-align: center;
+  margin: 1rem;
+}
 /* .coin-app {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import "./CoinPage.css";
-const coinPage = () => {
-  return <div>CoinPage</div>;
+const CoinPage = () => {
+  const params = useParams();
+  const [coin, setCoin] = useState({});
+  const url = `https://api.coingecko.com/api/v3/coins/${params.id}`;
+
+  useEffect(() => {
+    FetchCoin();
+  }, []);
+  const FetchCoin = async () => {
+    const { data } = await axios.get(url);
+    setCoin(data);
+  };
+  return (
+    <div>
+      <div className="coin-container">
+        <div className="content">
+          <h1>{coin.name}</h1>
+        </div>
+        <div className="content">
+          <div className="rank">
+            <span className="rank-btn">#{coin.market_cap_rank}</span>
+          </div>
+          <div className="info">
+            <div className="coin-heading">
+              {coin.image ? <img src={coin.image.small} alt="" /> : null}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default coinPage;
+export default CoinPage;

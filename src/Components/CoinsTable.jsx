@@ -5,6 +5,8 @@ import { useState } from "react";
 import { CryptoState } from "../CryptoContext";
 import Coin from "../Coin";
 import Pagination from "./Pagination";
+import { Link } from "react-router-dom";
+import CoinPage from "../Pages/CoinPage";
 const CoinsTable = () => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
@@ -51,17 +53,22 @@ const CoinsTable = () => {
           .slice(indexOfFirstRecord, indexOfLastRecord)
           .map((coin) => {
             return (
-              <Coin
+              <Link
+                to={`/coins/${coin.id}`}
+                element={<CoinPage />}
                 key={coin.id}
-                name={coin.name}
-                image={coin.image}
-                symbol={coin.symbol}
-                marketcap={coin.market_cap}
-                price={coin.current_price}
-                priceChange={coin.price_change_percentage_24h}
-                volume={coin.total_volume}
-                currency={symbol}
-              />
+              >
+                <Coin
+                  name={coin.name}
+                  image={coin.image}
+                  symbol={coin.symbol}
+                  marketcap={coin.market_cap}
+                  price={coin.current_price}
+                  priceChange={coin.price_change_percentage_24h}
+                  volume={coin.total_volume}
+                  currency={symbol}
+                />
+              </Link>
             );
           })}
         <Pagination
