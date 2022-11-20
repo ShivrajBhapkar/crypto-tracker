@@ -6,7 +6,7 @@ import { CryptoState } from "../CryptoContext";
 import Coin from "../Coin";
 import Pagination from "./Pagination";
 import { Link } from "react-router-dom";
-import CoinPage from "../Pages/CoinPage";
+import CoinPage from "../routes/CoinPage";
 const CoinsTable = () => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header";
 import HomePage from "./Pages/Homepage";
-import CoinPage from "./Pages/CoinPage";
+import CoinPage from "./routes/CoinPage";
 function App() {
   return (
     <BrowserRouter>
