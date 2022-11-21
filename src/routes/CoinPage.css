@@ -110,3 +110,6 @@ th {
   max-width: 1140px;
   margin: auto;
 } */
+.coin-price h1 {
+  padding: 3px;
+}

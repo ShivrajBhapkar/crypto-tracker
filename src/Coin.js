@@ -23,7 +23,7 @@ const Coin = ({
         </div>
         <div className="coin-data">
           <p className="coin-price">
-            {currency} {price}
+            {currency} {price.toLocaleString()}
           </p>
           <p className="coin-volume">
             {currency} {volume.toLocaleString()}
