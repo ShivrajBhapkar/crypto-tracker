@@ -13,7 +13,6 @@ function App() {
           <Route path="/coins" element={<CoinPage />}>
             <Route path=":id" element={<CoinPage />} />
           </Route>
-          {/* <Route index path="/coins/id" element={<CoinPage />} /> */}
         </Routes>
       </div>
     </BrowserRouter>

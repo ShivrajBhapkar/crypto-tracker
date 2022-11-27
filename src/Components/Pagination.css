@@ -21,6 +21,12 @@
 }
 ul {
   list-style-type: none;
-  /* font-weight: bold;
-  font-size: 20px; */
+  font-weight: bold;
+  font-size: 20px;
+}
+@media screen and (max-width: 500px) {
+  .pagination-component {
+    overflow: scroll;
+    width: 100%;
+  }
 }

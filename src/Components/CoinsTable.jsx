@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { CryptoState } from "../CryptoContext";
+
 import Coin from "../Coin";
 import Pagination from "./Pagination";
 import { Link } from "react-router-dom";
@@ -49,28 +50,30 @@ const CoinsTable = () => {
             />
           </form>
         </div>
-        {filteredCoins
-          .slice(indexOfFirstRecord, indexOfLastRecord)
-          .map((coin) => {
-            return (
-              <Link
-                to={`/coins/${coin.id}`}
-                element={<CoinPage />}
-                key={coin.id}
-              >
-                <Coin
-                  name={coin.name}
-                  image={coin.image}
-                  symbol={coin.symbol}
-                  marketcap={coin.market_cap}
-                  price={coin.current_price}
-                  priceChange={coin.price_change_percentage_24h}
-                  volume={coin.total_volume}
-                  currency={symbol}
-                />
-              </Link>
-            );
-          })}
+        <div className="cointable">
+          {filteredCoins
+            .slice(indexOfFirstRecord, indexOfLastRecord)
+            .map((coin) => {
+              return (
+                <Link
+                  to={`/coins/${coin.id}`}
+                  element={<CoinPage />}
+                  key={coin.id}
+                >
+                  <Coin
+                    name={coin.name}
+                    image={coin.image}
+                    symbol={coin.symbol}
+                    marketcap={coin.market_cap}
+                    price={coin.current_price}
+                    priceChange={coin.price_change_percentage_24h}
+                    volume={coin.total_volume}
+                    currency={symbol}
+                  />
+                </Link>
+              );
+            })}
+        </div>
         <Pagination
           nPages={nPages}
           currentPage={currentPage}

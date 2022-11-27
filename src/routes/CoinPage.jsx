@@ -11,7 +11,7 @@ const CoinPage = () => {
   const { currency, symbol } = CryptoState();
   useEffect(() => {
     FetchCoin();
-  }, []);
+  }, [currency]);
   const FetchCoin = async () => {
     const { data } = await axios.get(url);
     setCoin(data);
