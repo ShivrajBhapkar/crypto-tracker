@@ -35,6 +35,11 @@ const CoinsTable = () => {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const nPages = Math.ceil(coins.length / recordsPerPage);
+  const myStyle = {
+    color: "gold",
+    fontSize: "30px",
+    textAlign: "center",
+  };
   if (filteredCoins.length === coins.length) {
     return (
       <>
@@ -100,6 +105,9 @@ const CoinsTable = () => {
           </div>
 
           <div className="cointable">
+            {filteredCoins.length === 0 && (
+              <p style={myStyle}>Opps ...! Please try something else</p>
+            )}
             {filteredCoins.map((coin) => {
               return (
                 <Link
