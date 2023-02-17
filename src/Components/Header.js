@@ -5,11 +5,11 @@ import "./Header.css";
 import { CryptoState } from "../CryptoContext";
 const Header = () => {
   const { currency, setcurrency } = CryptoState();
-  let navigate = useNavigate();
+  let Navigate = useNavigate();
   return (
     <>
       <nav className="navbar">
-        <h1 onClick={() => navigate("/")} className="navbar-logo">
+        <h1 onClick={() => Navigate("/")} className="navbar-logo">
           Crypto Tracker
         </h1>
         <navigate />

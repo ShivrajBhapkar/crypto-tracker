@@ -13,16 +13,20 @@ const CoinsTable = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrrentPage] = useState(1);
   const [recordsPerPage] = useState(10);
-  const { currency, symbol } = CryptoState();
+  const { currency, symbol} = CryptoState();
+  
   const fetchCoins = async () => {
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
     const { data } = await axios.get(url);
+    console.log(data);
     setCoins(data);
+   
   };
-  console.log(coins);
+ 
   useEffect(() => {
-    fetchCoins();
+      fetchCoins();
   }, [currency]);
+  
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -35,12 +39,7 @@ const CoinsTable = () => {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const nPages = Math.ceil(coins.length / recordsPerPage);
-  const myStyle = {
-    color: "gold",
-    fontSize: "30px",
-    textAlign: "center",
-  };
-  if (filteredCoins.length === coins.length) {
+ 
     return (
       <>
         <div className="coin-app">
@@ -57,6 +56,7 @@ const CoinsTable = () => {
           </div>
 
           <div className="cointable">
+            <h3 style={{color:'green' , textAlign:"center"}}>click on coin to see detail</h3>
             {filteredCoins
               .slice(indexOfFirstRecord, indexOfLastRecord)
               .map((coin) => {
@@ -80,59 +80,18 @@ const CoinsTable = () => {
                 );
               })}
           </div>
-          <Pagination
-            nPages={nPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrrentPage}
-          />
+          {
+filteredCoins.length === coins.length ?( <Pagination 
+  nPages={nPages}
+  currentPage={currentPage}
+  setCurrentPage={setCurrrentPage}
+/>) : (<></>)
+          }
+         
         </div>
       </>
     );
-  } else {
-    return (
-      <>
-        <div className="coin-app">
-          <div className="coin-search">
-            <h1 className="coin-text">Search Currency</h1>
-            <form>
-              <input
-                type="text"
-                placeholder="Search"
-                className="coin-input"
-                onChange={handleChange}
-              />
-            </form>
-          </div>
 
-          <div className="cointable">
-            {filteredCoins.length === 0 && (
-              <p style={myStyle}>Opps ...! Please try something else</p>
-            )}
-            {filteredCoins.map((coin) => {
-              return (
-                <Link
-                  to={`/coins/${coin.id}`}
-                  element={<CoinPage />}
-                  key={coin.id}
-                >
-                  <Coin
-                    name={coin.name}
-                    image={coin.image}
-                    symbol={coin.symbol}
-                    marketcap={coin.market_cap}
-                    price={coin.current_price}
-                    priceChange={coin.price_change_percentage_24h}
-                    volume={coin.total_volume}
-                    currency={symbol}
-                  />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </>
-    );
-  }
 };
 
 export default CoinsTable;
