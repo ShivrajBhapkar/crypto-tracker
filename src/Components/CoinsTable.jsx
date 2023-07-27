@@ -32,7 +32,7 @@ const CoinsTable = () => {
 
     useEffect(() => {
         // Fetch initial data from the API
-        socket.current = io("ws://localhost:3001");
+        socket.current = io("https://cryptosocket.onrender.com");
 
         const fetchInitialData = async () => {
             const initialData = await fetchData(currency);
