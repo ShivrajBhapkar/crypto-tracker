@@ -5,24 +5,9 @@ import Header from "./Components/Header";
 import HomePage from "./Pages/Homepage";
 import CoinPage from "./routes/CoinPage";
 
-// import {io} from 'socket.io-client';
-// import { CryptoState } from "./CryptoContext";
-// const socket = io("http://localhost:3001");
-function App() {
-//   const { currency , setCoins } = CryptoState();
-//  useEffect(()=>{
-//   socket.on('latest_quakes', data => {
-// 	  if (data) {
-//       console.log(data)
-//        setCoins(data)
-// 	  }
-// 	} , []);
-//   return ()=>{
-//     socket.off("latest_quakes")
-//   }
-//  })
 
-//  socket.emit("currency" , currency)
+function App() {
+
   return (
     <BrowserRouter>
       <div>

@@ -18,6 +18,10 @@
   margin: 5px;
   border: none;
 }
+.active a{
+  color: green;
+ font-weight: bold;
+}
 ul {
   list-style-type: none;
   font-weight: bold;
