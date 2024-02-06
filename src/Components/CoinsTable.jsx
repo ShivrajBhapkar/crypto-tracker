@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useRef } from "react";
-import { debounce } from "lodash";
 import React, { useEffect, useState } from "react";
 import { CryptoState } from "../CryptoContext";
 import io from "socket.io-client";
@@ -31,19 +30,12 @@ const CoinsTable = () => {
     };
 
     useEffect(() => {
+        fetchData(currency);
+    }, []);
+    useEffect(() => {
         // Fetch initial data from the API
         socket.current = io("https://cryptosocket.onrender.com");
-
-        const fetchInitialData = async () => {
-            const initialData = await fetchData(currency);
-            // Emit the initial data to the Socket.IO server
-            if (initialData) {
-                socket.current.emit("initialData", { initialData, currency });
-            }
-        };
-
-        fetchInitialData();
-
+     socket.current.emit("initialData", {currency });
         socket.current.on("updateData", (updatedData) => {
             setCoins(updatedData);
             setCount((prevCount) => prevCount + 1);
@@ -55,12 +47,11 @@ const CoinsTable = () => {
     }, [currency]);
 
     const handleChange = (e) => {
-        // Use debounced version of setSearch
-        debouncedHandleChange(e.target.value);
+       
+         setSearch(e.target.value);
+        
     };
-    const debouncedHandleChange = debounce((value) => {
-        setSearch(value);
-    }, 500); // Debounce for 500ms
+   
 
     const filteredCoins = coins.filter((coin) => {
         return (
@@ -75,55 +66,57 @@ const CoinsTable = () => {
 
     return (
         <>
-            <div className="coin-app">
-                <div className="coin-search">
-                    <h1 className="coin-text">Search Currency</h1>
-                    <form>
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="coin-input"
-                            onChange={handleChange}
-                        />
-                    </form>
+            {coins ? (
+                <div className="coin-app">
+                    <div className="coin-search">
+                        <h1 className="coin-text">Search Currency</h1>
+                        <form>
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                className="coin-input"
+                                onChange={handleChange}
+                            />
+                        </form>
+                    </div>
+                    <div className="cointable">
+                        <h3 style={{ color: "green", textAlign: "center" }}>
+                            click on coin to see detail
+                        </h3>
+                        {filteredCoins
+                            .slice(indexOfFirstRecord, indexOfLastRecord)
+                            .map((coin) => {
+                                return (
+                                    <Link
+                                        to={`/coins/${coin.id}`}
+                                        element={<CoinPage />}
+                                        key={coin.id}
+                                    >
+                                        <Coin
+                                            name={coin.name}
+                                            image={coin.image}
+                                            symbol={coin.symbol}
+                                            marketcap={coin.market_cap}
+                                            price={coin.current_price}
+                                            priceChange={
+                                                coin.price_change_percentage_24h
+                                            }
+                                            volume={coin.total_volume}
+                                            currency={symbol}
+                                        />
+                                    </Link>
+                                );
+                            })}
+                    </div>
+                    <Pagination
+                        nPages={nPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrrentPage}
+                    />
                 </div>
-
-                <div className="cointable">
-                    <h3 style={{ color: "green", textAlign: "center" }}>
-                        click on coin to see detail
-                    </h3>
-                    {filteredCoins
-                        .slice(indexOfFirstRecord, indexOfLastRecord)
-                        .map((coin) => {
-                            return (
-                                <Link
-                                    to={`/coins/${coin.id}`}
-                                    element={<CoinPage />}
-                                    key={coin.id}
-                                >
-                                    <Coin
-                                        name={coin.name}
-                                        image={coin.image}
-                                        symbol={coin.symbol}
-                                        marketcap={coin.market_cap}
-                                        price={coin.current_price}
-                                        priceChange={
-                                            coin.price_change_percentage_24h
-                                        }
-                                        volume={coin.total_volume}
-                                        currency={symbol}
-                                    />
-                                </Link>
-                            );
-                        })}
-                </div>
-
-                <Pagination
-                    nPages={nPages}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrrentPage}
-                />
-            </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </>
     );
 };
