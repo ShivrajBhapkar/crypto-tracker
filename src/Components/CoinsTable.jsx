@@ -30,13 +30,15 @@ const CoinsTable = () => {
     };
 
     useEffect(() => {
+        console.log("initial call");
         fetchData(currency);
     }, []);
     useEffect(() => {
         // Fetch initial data from the API
         socket.current = io("https://cryptosocket.onrender.com");
-     socket.current.emit("initialData", {currency });
+        socket.current.emit("initialData", { currency });
         socket.current.on("updateData", (updatedData) => {
+            console.log("data from socket", updatedData);
             setCoins(updatedData);
             setCount((prevCount) => prevCount + 1);
         });
@@ -47,11 +49,8 @@ const CoinsTable = () => {
     }, [currency]);
 
     const handleChange = (e) => {
-       
-         setSearch(e.target.value);
-        
+        setSearch(e.target.value);
     };
-   
 
     const filteredCoins = coins.filter((coin) => {
         return (
